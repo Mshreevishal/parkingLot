@@ -10,8 +10,6 @@ const STATUS_BADGE: Record<SlotStatus, string> = {
   MAINTENANCE: 'badge-orange',
 };
 
-// Hard-coded for demo; in production this would come from an API call
-const DEMO_LOT_ID_PLACEHOLDER = ''; // Will be set dynamically
 
 function CreateSlotModal({ onClose, onSuccess, parkingLotId }: { onClose: () => void; onSuccess: () => void; parkingLotId: string }) {
   const { showToast } = useToast();
@@ -27,8 +25,8 @@ function CreateSlotModal({ onClose, onSuccess, parkingLotId }: { onClose: () => 
       showToast('Slot created!', 'success');
       onSuccess();
       onClose();
-    } catch (err: any) {
-      showToast(err.response?.data?.error || 'Failed to create slot', 'error');
+    } catch (err) {
+      showToast(err instanceof Error ? (err as { response?: { data?: { error?: string } } }).response?.data?.error ?? err.message : 'Failed to create slot', 'error');
     } finally {
       setLoading(false);
     }

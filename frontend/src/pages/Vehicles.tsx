@@ -23,8 +23,8 @@ function RegisterModal({ onClose, onSuccess }: { onClose: () => void; onSuccess:
       showToast('Vehicle registered successfully!', 'success');
       onSuccess();
       onClose();
-    } catch (err: any) {
-      showToast(err.response?.data?.error || 'Failed to register vehicle', 'error');
+    } catch (err) {
+      showToast(err instanceof Error ? (err as { response?: { data?: { error?: string } } }).response?.data?.error ?? err.message : 'Failed to register vehicle', 'error');
     } finally {
       setLoading(false);
     }

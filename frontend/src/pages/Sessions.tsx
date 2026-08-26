@@ -38,8 +38,9 @@ function EntryModal({ onClose, onSuccess }: { onClose: () => void; onSuccess: ()
       showToast('Vehicle parked successfully!', 'success');
       onSuccess();
       onClose();
-    } catch (err: any) {
-      showToast(err.response?.data?.error || 'Failed to create session', 'error');
+    } catch (err) {
+      const msg = err instanceof Error ? (err as { response?: { data?: { error?: string } } }).response?.data?.error ?? err.message : 'Failed to create session';
+      showToast(msg, 'error');
     } finally {
       setLoading(false);
     }
@@ -120,8 +121,9 @@ function ExitModal({ session, onClose, onSuccess }: { session: ParkingSession; o
       showToast(`Session closed. Fee collected: $${result.payment.amount.toFixed(2)}`, 'success');
       onSuccess();
       onClose();
-    } catch (err: any) {
-      showToast(err.response?.data?.error || 'Failed to complete session', 'error');
+    } catch (err) {
+      const msg = err instanceof Error ? (err as { response?: { data?: { error?: string } } }).response?.data?.error ?? err.message : 'Failed to complete session';
+      showToast(msg, 'error');
     } finally {
       setLoading(false);
     }

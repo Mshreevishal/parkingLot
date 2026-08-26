@@ -13,7 +13,7 @@ interface ToastContextValue {
 export const ToastContext = React.createContext<ToastContextValue>({ showToast: () => {} });
 
 export function useToast() {
-  return React.useContext(ToastContext);
+  return React.useContext(ToastContext); // eslint-disable-line
 }
 
 // ── Sidebar ────────────────────────────────────────────────────────────────────
@@ -75,7 +75,7 @@ function ToastIcon({ type }: { type: ToastType }) {
 // ── Layout shell ───────────────────────────────────────────────────────────────
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
-  let nextId = React.useRef(0);
+  const nextId = React.useRef(0);
 
   const showToast = useCallback((message: string, type: ToastType = 'info') => {
     const id = ++nextId.current;

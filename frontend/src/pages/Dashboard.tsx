@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ParkingSquare, Car, CheckCircle2, Activity, TrendingUp } from 'lucide-react';
+import { ParkingSquare, Activity } from 'lucide-react';
 import { slotApi, sessionApi, vehicleApi } from '../services/api';
 import type { ParkingSlot, ParkingSession, Vehicle } from '../types';
 
