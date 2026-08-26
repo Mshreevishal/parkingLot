@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '../server';
+import { prisma } from '../lib/prisma';
 import { createSessionSchema, completeSessionSchema } from '../validations/session.validation';
 import { z } from 'zod';
 
